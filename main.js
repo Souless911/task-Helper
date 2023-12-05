@@ -5,18 +5,22 @@ const url=require('url');
 let mainWindow;
 
 function createMainWindow() {
+    const startUrl= url.format({
+        pathname:path.join(__dirname,'./my-app/build/index.html'),
+        protocol:'file',
+    })
+   
+   
     const mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
         title: "Task Helper",
     })
-    mainWindow.loadURL(
-        url.format({
-            pathname:path.join(__dirname,'./renderer/index.html'),
-            protocol:'file:',
-            slashes:true
-        })
-        );
+     //opens devtools within browser
+    mainWindow.webContents.openDevTools();
+
+
+    mainWindow.loadURL(startUrl);
 }
 
 app.whenReady().then(()=>{
